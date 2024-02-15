@@ -13,6 +13,7 @@ chat_history = []
 async def reply_message(update: Update, context: ContextTypes.DEFAULT_TYPE)->None:  
     if chat_history == []:
         chat_history.append(AIMessage(content= 'good day mate'))
+        
     await update.message.reply_html(rf"Answer {update.effective_user.mention_html()}'s Question")
     response = ey_demo.test_get_answer(chat_history= chat_history,user_query=update.message.text)
     await update.message.reply_text(response)

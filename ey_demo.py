@@ -4,7 +4,6 @@ from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.chains import RetrievalQA
 import os 
 from pypdf import PdfReader
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
@@ -53,7 +52,7 @@ def test_get_answer(chat_history,user_query):
         ("user", "{input}"),
         ("user", "Given the above conversation, generate a search query to look up in order to get information relevant to the conversation")
     ])
-    
+
     history_chat_retriever_chain = create_history_aware_retriever(ChatOpenAI(), retriever, prompt)
     final_retriever_chain = create_retrieval_chain(history_chat_retriever_chain, document_chain)
     response = final_retriever_chain.invoke({

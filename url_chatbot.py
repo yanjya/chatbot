@@ -2,21 +2,20 @@ import streamlit as st
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_community.document_loaders import WebBaseLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma ,faiss
+from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.chains import create_history_aware_retriever, create_retrieval_chain,ConversationChain
+from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain.chains.conversation.memory import ConversationBufferMemory
-from langchain_community.document_loaders import PyPDFLoader
+
 
 #load api key
 load_dotenv()
 
-
+ #get the text in the doc form
 def get_vectorstore_from_url(url) :
-    #get the text in the doc form
+    
     loader =  WebBaseLoader(url)
     documents = loader.load()
 
@@ -69,7 +68,7 @@ def get_response(user_input):
 
 
 #app config
-st.set_page_config(page_title='Financial slave', page_icon="💶")
+st.set_page_config(page_title='Friday Meeting', page_icon="🤓")
 st.title("chat with websites")
 if "chat_history" not in st.session_state :
     st.session_state.chat_history = [
